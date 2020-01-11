@@ -62,22 +62,22 @@ public class KeyHandler implements KeyListener {
                 break;
             case KeyEvent.VK_DOWN:
                 if(!move_down.getPressed()){
-                    move_up.setPressed(true,  KeyEvent.VK_DOWN);
+                    move_down.setPressed(true,  KeyEvent.VK_DOWN);
                 }
                 break;
             case KeyEvent.VK_LEFT:
                 if(!move_left.getPressed()){
-                    move_up.setPressed(true,  KeyEvent.VK_LEFT);
+                    move_left.setPressed(true,  KeyEvent.VK_LEFT);
                 }
                 break;
             case KeyEvent.VK_RIGHT:
                 if(!move_right.getPressed()){
-                    move_up.setPressed(true,  KeyEvent.VK_RIGHT);
+                    move_right.setPressed(true,  KeyEvent.VK_RIGHT);
                 }
                 break;
             case KeyEvent.VK_ENTER:
                 if(!select.getPressed()){
-                    move_up.setPressed(true,  KeyEvent.VK_ENTER);
+                    select.setPressed(true,  KeyEvent.VK_ENTER);
                 }
                 break;
         }
@@ -93,22 +93,22 @@ public class KeyHandler implements KeyListener {
                 break;
             case KeyEvent.VK_DOWN:
                 if (move_down.getPressed()) {
-                    move_up.setPressed(false);
+                    move_down.setPressed(false);
                 }
                 break;
             case KeyEvent.VK_LEFT:
                 if (move_left.getPressed()) {
-                    move_up.setPressed(false);
+                    move_left.setPressed(false);
                 }
                 break;
             case KeyEvent.VK_RIGHT:
                 if (move_right.getPressed()) {
-                    move_up.setPressed(false);
+                    move_right.setPressed(false);
                 }
                 break;
             case KeyEvent.VK_ENTER:
                 if (select.getPressed()) {
-                    move_up.setPressed(false);
+                    select.setPressed(false);
                 }
                 break;
         }
