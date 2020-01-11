@@ -44,10 +44,10 @@ public class Map {
     public void drawMap(Graphics g){
         for(int i = 0; i < terrain.length; i++){
             for(int j = 0; j < terrain[0].length; j++){
-                if (terrain[i][j].getTerrain_type() == "forest"){
+                if (terrain[i][j].getTerrain_type().equals("forest")){
                     g.setColor(Color.GREEN);
                     drawRect(i, j, g);
-                }else if(terrain[i][j].getTerrain_type() == "hills"){
+                }else if(terrain[i][j].getTerrain_type().equals("hills")){
                     g.setColor(Color.GRAY);
                     drawRect(i, j, g);
                 }else{
