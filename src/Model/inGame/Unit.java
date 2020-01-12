@@ -5,13 +5,19 @@ package Model.inGame;
  */
 
 public class Unit {
+    static final int MEN_AT_ARMS = 0;
+    static final int BOWMAN = 1;
+    static final int BALLISTA = 2;
+    static final int TREBUCHET = 3;
+    
+    
     private int health_points;
     private int attack_value;
-    private final String unit_type;
+    private final int unit_type;
     private int xCoord;
     private int yCoord;
 
-    public Unit(int health_points, int attack_value, String unit_type, int xCoord, int yCoord) {
+    public Unit(int health_points, int attack_value, int unit_type, int xCoord, int yCoord) {
         this.health_points = health_points;
         this.attack_value = attack_value;
         this.unit_type = unit_type;
@@ -27,7 +33,7 @@ public class Unit {
         return attack_value;
     }
 
-    public String getUnit_type() {
+    public int getUnit_type() {
         return unit_type;
     }
 

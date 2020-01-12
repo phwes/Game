@@ -31,7 +31,7 @@ public class KeyHandler implements KeyListener {
         move_down = () -> controller.moveCursor("down");
         move_left = () -> controller.moveCursor("left");
         move_right = () -> controller.moveCursor("right");
-        select = () -> controller.moveCursor("up");
+        select = controller::select;
 
         keyMap.put(KeyEvent.VK_UP, move_up);
         keyMap.put(KeyEvent.VK_DOWN, move_down);
@@ -41,8 +41,8 @@ public class KeyHandler implements KeyListener {
 
     }
 
-    abstract interface Key{
-        public abstract void action();
+    interface Key{
+        void action();
     }
 
     @Override

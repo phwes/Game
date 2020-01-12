@@ -1,6 +1,7 @@
 package Model.inGame;
 
 import Images.Sprites;
+import States.Scene;
 
 import java.awt.*;
 
@@ -18,7 +19,7 @@ public class Map {
     private Terrain [][] terrain;
     private Building[][] buildings;
     private Unit [][] units;
-    private Cursor cursor;
+    public Cursor cursor;
 
     private int rectWidth;
     private int rectHeight;
@@ -37,18 +38,21 @@ public class Map {
         rectHeight = frameHeight/height;
 
 
-        // Temporary fill terrain
+        // Temporary fill terrain (test)
         for(int i = 0; i < terrain.length; i++){
             for(int j = 0; j < terrain[0].length; j++){
                 if ((i+j)%2 == 0){
-                    terrain[i][j] = new Terrain(3,3, "forest");
+                    terrain[i][j] = new Terrain(3,3, Terrain.FOREST);
                 }else{
-                    terrain[i][j] = new Terrain(3,5, "hills");
+                    terrain[i][j] = new Terrain(3,5, Terrain.HILLS);
                 }
             }
         }
 
-        // Temporary create units
+        // Temporary create units (test)
+        units[4][2] = new Unit(10,5, Unit.MEN_AT_ARMS, 4,2);
+        units[10][10] = new Unit(10,5, Unit.MEN_AT_ARMS, 10,10);
+        units[15][8] = new Unit(10,5, Unit.MEN_AT_ARMS, 15,8);
 
     }
 
@@ -76,14 +80,38 @@ public class Map {
                 break;
         }
     }
+
+    public void drawUnits(Graphics g){
+        for(int i = 0; i < units.length; i++){
+            for(int j = 0; j < units[0].length; j++){
+                if (units[i][j] != null){
+                    drawUnit(g, units[i][j]);
+                }
+            }
+        }
+    }
+
+    private void drawUnit(Graphics g, Unit unit){
+        switch (unit.getUnit_type()){
+            case Unit.MEN_AT_ARMS:
+                Rectangle ref = indexToPixelCoord(unit.getxCoord(), unit.getyCoord());
+                g.drawImage(sprites.men_at_arms, ref.x, ref.y, null);
+                break;
+            case Unit.BOWMAN:
+
+            case Unit.BALLISTA:
+
+            case Unit.TREBUCHET:
+        }
+    }
     
     public void drawMap(Graphics g){
         for(int i = 0; i < terrain.length; i++){
             for(int j = 0; j < terrain[0].length; j++){
-                if (terrain[i][j].getTerrain_type().equals("forest")){
+                if (terrain[i][j].getTerrain_type() == Terrain.FOREST){
                     g.setColor(Color.GREEN);
                     drawRect(i, j, g);
-                }else if(terrain[i][j].getTerrain_type().equals("hills")){
+                }else if(terrain[i][j].getTerrain_type() == Terrain.HILLS){
                     g.setColor(Color.GRAY);
                     drawRect(i, j, g);
                 }else{
@@ -92,6 +120,7 @@ public class Map {
             }
         }
 
+        drawUnits(g);
         drawCursor(g);
     }
 
@@ -120,6 +149,7 @@ public class Map {
     public void selectUnit(){
         if(units[cursor.getxCoord()][cursor.getyCoord()] != null && cursor.selectedUnit == null){
             cursor.selectedUnit = units[cursor.getxCoord()][cursor.getyCoord()];
+            System.out.println("Selected unit: " + cursor.selectedUnit.getUnit_type());
         }
     }
 

@@ -20,11 +20,16 @@ public class Controller {
         new KeyHandler(this, gamePanel);
         map = new Map(30,30,900,900);
         this.gamePanel = gamePanel;
-        scene = new Scene("map_scene");
+        scene = new Scene(Scene.MAP_SCENE);
     }
 
-    public void action(){
-        System.out.println("You pressed a key.");
+    public void select(){
+        if(map.cursor.selectedUnit == null){
+            map.selectUnit();
+        }else{
+            map.moveUnit();
+        }
+        gamePanel.repaint();
     }
 
     public void paintMap(Graphics g){
@@ -32,19 +37,21 @@ public class Controller {
     }
 
     public void moveCursor(String direction){
-        switch (direction){
-            case "up":
-                map.moveCursor('u');
-                break;
-            case "down":
-                map.moveCursor('d');
-                break;
-            case "left":
-                map.moveCursor('l');
-                break;
-            case "right":
-                map.moveCursor('r');
-                break;
+        if(scene.getSceneName() == Scene.MAP_SCENE){
+            switch (direction){
+                case "up":
+                    map.moveCursor('u');
+                    break;
+                case "down":
+                    map.moveCursor('d');
+                    break;
+                case "left":
+                    map.moveCursor('l');
+                    break;
+                case "right":
+                    map.moveCursor('r');
+                    break;
+            }
         }
         // update the map when cursor has moved
         gamePanel.repaint();

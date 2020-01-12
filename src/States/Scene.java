@@ -5,9 +5,18 @@ package States;
  */
 
 public class Scene {
-    private String sceneName;
+    private int scene;
+    public static final int MAP_SCENE = 1;
 
-    public Scene(String sceneName) {
-        this.sceneName = sceneName;
+    public Scene(int scene) {
+        this.scene = scene;
+    }
+
+    public int getSceneName() {
+        return scene;
+    }
+
+    public void setScene(int scene) {
+        this.scene = scene;
     }
 }
