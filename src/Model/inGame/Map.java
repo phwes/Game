@@ -1,12 +1,18 @@
 package Model.inGame;
 
+import Images.Sprites;
+
 import java.awt.*;
+
+
 
 /**
  * Keeps track of the map and its content.
  */
 
 public class Map {
+    private Sprites sprites;
+
     private int height;
     private int width;
     private Terrain [][] terrain;
@@ -25,6 +31,8 @@ public class Map {
         this.units = new Unit[width][height];
         this.cursor = new Cursor(0,0);
 
+        sprites = new Sprites();
+
         rectWidth = frameWidth/width;
         rectHeight = frameHeight/height;
 
@@ -38,6 +46,34 @@ public class Map {
                     terrain[i][j] = new Terrain(3,5, "hills");
                 }
             }
+        }
+
+        // Temporary create units
+
+    }
+
+    public void moveCursor(char dir){
+        switch (dir){
+            case 'u':
+                if(cursor.getyCoord() != 0){
+                    cursor.setyCoord(cursor.getyCoord()-1);
+                }
+                break;
+            case 'd':
+                if(cursor.getyCoord() != height-1){
+                    cursor.setyCoord(cursor.getyCoord()+1);
+                }
+                break;
+            case 'l':
+                if(cursor.getxCoord() != 0){
+                    cursor.setxCoord(cursor.getxCoord()-1);
+                }
+                break;
+            case 'r':
+                if(cursor.getxCoord() != width-1){
+                    cursor.setxCoord(cursor.getxCoord()+1);
+                }
+                break;
         }
     }
     
@@ -55,10 +91,17 @@ public class Map {
                 }
             }
         }
+
+        drawCursor(g);
     }
 
     private void drawRect(int x, int y, Graphics g){
         g.fillRect(rectWidth*x,rectHeight*y,rectWidth,rectHeight);
+    }
+
+    private void drawCursor(Graphics g){
+        Rectangle reference = indexToPixelCoord(cursor.getxCoord(), cursor.getyCoord());
+        g.drawImage(sprites.tile_cursor, reference.x, reference.y, null);
     }
 
     /**
@@ -67,7 +110,7 @@ public class Map {
      * @param y Y-coordinate for the tile
      */
     // TODO: Make private
-    public Rectangle indexToPixelCoord(int x, int y){
+    private Rectangle indexToPixelCoord(int x, int y){
         return new Rectangle(rectWidth*x,rectHeight*y,rectWidth,rectHeight);
     }
 
@@ -94,15 +137,4 @@ public class Map {
         return true;
     }
 
-    public Terrain[][] getTerrain() {
-        return terrain;
-    }
-
-    public Building[][] getBuildings() {
-        return buildings;
-    }
-
-    public Unit[][] getUnits() {
-        return units;
-    }
 }

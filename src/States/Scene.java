@@ -5,4 +5,9 @@ package States;
  */
 
 public class Scene {
+    private String sceneName;
+
+    public Scene(String sceneName) {
+        this.sceneName = sceneName;
+    }
 }
