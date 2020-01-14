@@ -16,13 +16,30 @@ public class Unit {
     private final int unit_type;
     private int xCoord;
     private int yCoord;
+    private int faction;
+    private int movement;
 
-    public Unit(int health_points, int attack_value, int unit_type, int xCoord, int yCoord) {
+    public Unit(int health_points, int attack_value, int unit_type, int xCoord, int yCoord, int faction, int movement) {
         this.health_points = health_points;
         this.attack_value = attack_value;
         this.unit_type = unit_type;
         this.xCoord = xCoord;
         this.yCoord = yCoord;
+        this.faction = faction;
+        this.movement = movement;
+    }
+
+    public int getMovement() {
+        return movement;
+    }
+
+    public int takeDamage(int incomingDamage){
+        health_points -= incomingDamage;
+        return health_points;
+    }
+
+    public int getFaction() {
+        return faction;
     }
 
     public int getHealth_points() {

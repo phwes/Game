@@ -24,7 +24,7 @@ public class Controller {
     }
 
     public void select(){
-        if(map.cursor.selectedUnit == null){
+        if(map.cursor.getSelectedUnit() == null){
             map.selectUnit();
         }else{
             map.moveUnit();
